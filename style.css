@@ -1,0 +1,79 @@
+h2 {margin: 0}
+body {margin:0;background:black;font-family: sans-serif;}
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+
+.mapboxgl-ctrl-logo {
+	opacity: 0.05;
+}
+.mapboxgl-ctrl {display:none}
+
+#setup, #workout {
+	height: 100vh;
+	overflow-y: scroll;
+	width: 300px;
+	height: 100vh;
+	background: #ffffffaa;
+	z-index: 100000;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+#setup input {
+	width: 100%;
+	height: 30px;
+	background: #ffffffaa;
+}
+#workout {display:none;}
+#courselist {
+	padding: 0px;
+	margin: 0px;
+}
+#courselist li {
+	list-style: none;
+	border-bottom: 1px solid black;
+	cursor: pointer;
+	padding: 10px 5px;
+}
+#courselist li:hover {
+	background: lightgrey;
+}
+
+.mapboxgl-popup-content {
+	padding: 2px 4px 2px;
+}
+
+#data {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #ffffffaa;
+	z-index: 999;
+	height: 100px;
+	width: 100%;
+	text-align: center;
+	overflow-x: auto;
+	width: 100vw;
+}
+#data div {
+	display: inline-block;
+	font-family: monospace;
+	font-weight: bolder;
+	line-height: 100px;
+	padding: 0px 20px 0px 60px;
+	font-size: 4em;
+}
+#data div::before {
+	content: attr(title);
+	position: absolute;
+	text-transform: uppercase;
+	font-size: 12pt;
+	line-height: initial;
+	height: auto;
+	max-width: 100%;
+	/* background:red; */
+}
+
+#overlay
