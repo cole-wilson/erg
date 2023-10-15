@@ -1,0 +1,3 @@
+[submodule "PyRow"]
+	path = PyRow
+	url = https://github.com/wemakewaves/PyRow

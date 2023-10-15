@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ErgVR</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+	<link href="./threebox.css" rel="stylesheet">
+	<link href="./style.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
+	<script src="/turf.min.js"></script>
+</head>
+<body>
+	<div id="data"></div>
+	<div id="setup">
+		<input id="courseSearch" placeholder="search for a course" type="search">
+		<ul id="courselist"></ul>
+		<button id="custom">add custom course</button>
+	</div>
+	<div id="workout"><a href="#">&lt;-- back</a></div>
+	<div id="map"></div>
+
+
+	<script type="importmap">{"imports":{"three": "https://threejs.org/build/three.module.js"}}</script>
+	<script src="./threebox.min.js"></script>
+	<script src="script.js" type=module></script>
+
+</body>
+</html>
+<!-- map.on("sourcedata", () => { -->
+<!-- 	let features = map.queryRenderedFeatures(); -->
+<!-- 		for (var i=0;i<features.length;i++) { -->
+<!-- 				console.log(features[i].properties.class, features[i].properties.type) -->
+<!-- 			let type = features[i].properties.class; -->
+<!-- 			if (type == 'park' || type == 'wetland' || type == 'wood') { -->
+<!-- 					try { -->
+<!-- 						map.removeSource('source'+i) -->
+<!-- 						map.removeLayer('source'+i) -->
+<!-- 					} -->
+<!-- 					catch (e) {} -->
+<!-- 				map.addSource('source'+i, { -->
+<!-- 					'type': 'geojson', -->
+<!-- 					'data': { -->
+<!-- 						'type': 'Feature', -->
+<!-- 						'properties': {}, -->
+<!-- 						'geometry': features[i].geometry, -->
+<!-- 					} -->
+<!-- 				}); -->
+<!-- 					map.addLayer({ -->
+<!-- 							id: 'filllayer'+i, -->
+<!-- 							type: 'fill', -->
+<!-- 							'source': 'source'+i, -->
+<!-- 							paint: {'fill-color': 'green'} -->
+<!-- 				}); -->
+<!-- 			} -->
+<!-- 		} -->
+<!-- 				}) -->
+<!-- 	}); -->

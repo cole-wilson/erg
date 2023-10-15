@@ -61,82 +61,82 @@ map.on('mousedown', () => {interacting = true;});
 spinGlobe()
 
 
-
-// const draw = new MapboxDraw({
-// 	displayControlsDefault: false,
-// 	controls: {line_string: true,},
-// 	defaultMode: 'draw_line_string'
-// });
-// map.addControl(draw);
+document.getElementById("custom").onclick = () => {
+	const draw = new MapboxDraw({
+		displayControlsDefault: true,
+		controls: {line_string: true,},
+		defaultMode: 'draw_line_string'
+	});
+	map.addControl(draw);
+	alert("draw the course")
+}
 
 map.on("zoom", ()=>{
-	console.log(map.getZoom())
+	console.log('zoom', map.getZoom())
 })
 
-map.on("load", () => {	
-	map.loadImage(
-'./trees.jpeg',
-(err, image) => {
-// Throw an error if something goes wrong.
-if (err) throw err;
- 
-// Add the image to the map style.
-map.addImage('pattern', image);
- 
-// Create a new layer and style it using `fill-pattern`.
-	map.addLayer(
-{
-'id': 'add-3d-buildings',
-'source': 'composite',
-'source-layer': 'building',
-'filter': ['==', 'extrude', 'true'],
-'type': 'fill-extrusion',
-'minzoom': 15,
-'paint': {
-'fill-extrusion-color': '#aaa',
- 
-// Use an 'interpolate' expression to
-// add a smooth transition effect to
-// the buildings as the user zooms in.
-'fill-extrusion-height': [
-	'interpolate',
-	['linear'],
-	['zoom'],
-	15,
-	0,
-	15.05,
-	['get', 'height']
-],
-'fill-extrusion-base': [
-'interpolate',
-	['linear'],
-	['zoom'],
-	15,
-	0,
-	15.05,
-	['get', 'min_height']
-],
-'fill-extrusion-opacity': 1,
-	'fill-extrusion-pattern': 'pattern'
-}
-},
-);
-}
-);
+// partly from mapbox examples
+map.on("load", () => {
+	map.loadImage('./trees.jpeg', (err, image) => {
+		// Throw an error if something goes wrong.
+		if (err) throw err;
+		// Add the image to the map style.
+		map.addImage('pattern', image);
+		// Create a new layer and style it using `fill-pattern`.
+		map.addLayer({
+			'id': 'add-3d-buildings',
+			'source': 'composite',
+			'source-layer': 'building',
+			'filter': ['==', 'extrude', 'true'],
+			'type': 'fill-extrusion',
+			'minzoom': 15,
+			'paint': {
+				'fill-extrusion-color': '#aaa',
 
+				// Use an 'interpolate' expression to
+				// add a smooth transition effect to
+				// the buildings as the user zooms in.
+				'fill-extrusion-height': [
+					'interpolate',
+					['linear'],
+					['zoom'],
+					15,
+					0,
+					15.05,
+					['get', 'height']
+				],
+				'fill-extrusion-base': [
+					'interpolate',
+					['linear'],
+					['zoom'],
+					15,
+					0,
+					15.05,
+					['get', 'min_height']
+				],
+				'fill-extrusion-opacity': 1,
+				'fill-extrusion-pattern': 'pattern'
+			}
+		});
+	});
 	map.addLayer({
 		id: 'custom_layer',
 		type: 'custom',
 		renderingMode: '3d',
 		onAdd: function (map, gl) {
 			window.tb = new Threebox(map,gl,{defaultLights: true, sky:true,});
-
 			setUpWS();
 			setUp3D();
 			showCourses();
-			
 		},
 		render: function (gl, matrix) {tb.update()}
+	});
+	map.on('draw.create', function (e) {
+		courses.custom = {
+			name: "Custom Course",
+			coordinates: e.features[0].geometry.coordinates
+		}
+		showCourses()
 	});
 });
 
@@ -164,7 +164,7 @@ function setUp3D() {
 		requestAnimationFrame(animate);
 
 		let course=currentCourse
-		console.log(course, window.data.distance)
+		// console.log(course, window.data.distance)
 		if (course == null || window.data.distance > workout.distance)
 			return
 		course = course.coordinates
@@ -189,6 +189,7 @@ function setUp3D() {
 
 function showCourses() {
 	var courseLines = [];
+	document.getElementById("courselist").innerHTML = "";
 
 	for (var courseName in courses) {
 		var course = courses[courseName];
@@ -236,13 +237,13 @@ function newWorkout(courseName) {
 	})
 
 	let gui = new GUI({container:settings, width: "100%", title: "Workout Options"})
-	// let typeController = gui.add(workout, 'type', ['distance',])
+	// let typeController = gui.a` /uu`dd(workout, 'type', ['distance',])
 	// gui.add(workout, "hours",)
 	// gui.add(workout, "minutes",)
 	// gui.add(workout, "seconds",)
 	gui.add(workout, 'pace')
 	gui.add(workout, 'split')
-	gui.add(workout, "distance", 100, 20000, 100)	
+	gui.add(workout, "distance", 100, 20000, 100)
 
 	// typeController.onChange((d)=>{
 		// if (d == "distance") {
