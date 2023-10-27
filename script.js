@@ -31,7 +31,7 @@ navigator.storage.persist()
 registerServiceWorker();
 
 var currentCourse = null;
-var workout = {distance:2000, pace:105, split:400};
+var workout = {distance:500, pace:105, split:400};
 var data = {}
 var interacting = false;
 let ws;
@@ -243,7 +243,7 @@ function newWorkout(courseName) {
 	// gui.add(workout, "seconds",)
 	gui.add(workout, 'pace')
 	gui.add(workout, 'split')
-	gui.add(workout, "distance", 100, 20000, 100)
+	gui.add(workout, "distance", 100, 5000, 100)
 
 	// typeController.onChange((d)=>{
 		// if (d == "distance") {
@@ -256,9 +256,9 @@ function newWorkout(courseName) {
 		document.documentElement.requestFullscreen();
 		map.flyTo({
 			center: course.coordinates[0],
-			pitch: 80,
+			pitch: 75,
 			bearing: turf.bearing(turf.along(turf.lineString(course.coordinates), 0.1, {units:'meters'}), course.coordinates[0]),
-			zoom: 20
+			zoom: 17.9
 		})
 		document.getElementById("workout").style.display = "none"
 		document.getElementById("data").style.display = "block";

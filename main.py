@@ -1,10 +1,6 @@
 import asyncio
 import websockets
 import json
-import sys
-
-sys.path.insert(1, "PyRow")
-
 from pyrow import pyrow
 import time
 
